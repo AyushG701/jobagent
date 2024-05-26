@@ -9,6 +9,7 @@ import xss from "xss-clean";
 import mongoSanitize from "express-mongo-sanitize";
 import router from "./routes/index.js";
 import dbConnection from "./dbConfig/dbConnection.js";
+import errorMiddleware from "./middlewares/errorMiddleware.js";
 dotenv.config();
 
 const app = express();
@@ -28,6 +29,10 @@ app.use(mongoSanitize());
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true }));
 app.use(router);
+
+// error middleware
+app.use(errorMiddleware);
+
 app.listen(PORT, () => {
   console.log(`server is running on port ${PORT}`);
 });
