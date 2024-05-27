@@ -25,7 +25,12 @@ const userSchema = new mongoose.Schema(
       minlength: [8, "Password must be at least 8 characters long"],
       select: true,
     },
-    accountType: { type: String, default: "seeker" },
+    accountType: {
+      type: String,
+      default: "seeker",
+      enum: ["user", "company"],
+      required: true,
+    },
     contact: { type: String },
     address: { type: String },
     profileUrl: { type: String },
